@@ -1,7 +1,6 @@
 // Fixed Register.tsx with direct API call
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios'; // Import axios for direct API calls
 import { API_ENDPOINTS } from '../../api/api';
 import { Eye, EyeOff, Loader, Lock, User, AlertCircle, Mail, UserPlus, Check, X } from 'lucide-react';
 

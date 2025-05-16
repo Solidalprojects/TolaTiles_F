@@ -1,7 +1,6 @@
 // Fix 1: Update client/src/api/loginauth.ts
 // This file handles the login request and token storage
 
-import { apiClient } from './header';
 import { API_ENDPOINTS } from './api';
 import { User } from '../types/types';
 import { setStoredAuth } from './storedAuth';

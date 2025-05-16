@@ -1,16 +1,15 @@
 // Updated src/pages/ProjectDetail.tsx
 import { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Project, Tile } from '../types/types';
 import { projectService, tileService } from '../services/api';
 import { formatImageUrl } from '../utils/imageUtils';
 import { 
   ChevronLeft, ChevronRight, ArrowLeft, Calendar, MapPin, 
-  User, CheckSquare, ChevronDown, ChevronUp, Info, AlertCircle
+  User, CheckSquare, ChevronDown, ChevronUp, AlertCircle
 } from 'lucide-react';
 
 const ProjectDetail = () => {
-  const navigate = useNavigate();
   const { id, slug } = useParams<{ id?: string, slug?: string }>();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);

@@ -1,7 +1,7 @@
 // src/context/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '../types/types';
-import { getStoredAuth, setStoredAuth, clearStoredAuth, clearAllAuthData } from '../services/auth';
+import { getStoredAuth, setStoredAuth, clearAllAuthData } from '../services/auth';
 import { apiClient } from '../api/header';
 import { API_ENDPOINTS } from '../api/api';
 
