@@ -1,11 +1,11 @@
 // Updated Navbar.tsx with corrected login path
 import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { getCurrentUser, logout, isAuthenticated } from '../services/auth';
+import { Link, useLocation } from 'react-router-dom';
+import { getCurrentUser, isAuthenticated } from '../services/auth';
 import logo from '../assets/tolatiles.jpg';
 import { 
-  Menu, X, LogOut, User, ChevronDown, Home, Grid, Briefcase, 
-  Settings, Phone, Info, 
+  Menu, X, ChevronDown, Home, Grid, Briefcase, 
+  Phone, Info, 
   // Import all Lucide icons that might be used for product types
   Flame, Droplet, Box, BookOpen, Dribbble, Coffee, Compass,
   Diamond, Award, Leaf, Layers, Palette, PaintBucket, Star, Zap,
@@ -47,13 +47,12 @@ const getIconByName = (iconName: string | undefined, size = 18) => {
 };
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoggedIn] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isProductsMenuOpen, setIsProductsMenuOpen] = useState(false);
-  const [username, setUsername] = useState('');
+  const [, setUsername] = useState('');
   const location = useLocation();
-  const navigate = useNavigate();
   
   // Get product types from context
   const { productTypes, loading } = useProductTypes();
@@ -78,22 +77,10 @@ const Navbar = () => {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    setIsLoggedIn(false);
-    setIsProfileMenuOpen(false);
-    navigate('/auth/login');
-  };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     // Close other menus when mobile menu is toggled
-    setIsProductsMenuOpen(false);
-  };
-
-  const toggleProfileMenu = () => {
-    setIsProfileMenuOpen(!isProfileMenuOpen);
-    // Close products menu when profile menu is toggled
     setIsProductsMenuOpen(false);
   };
 
@@ -213,46 +200,7 @@ const Navbar = () => {
               <span>Contact</span>
             </Link>
             
-            {isLoggedIn ? (
-              <div className="relative ml-3 menu-container">
-                <div>
-                  <button
-                    type="button"
-                    className="flex items-center text-white px-3 py-2 rounded-md hover:bg-blue-800 transition-colors focus:outline-none"
-                    onClick={toggleProfileMenu}
-                  >
-                    <User size={18} className="mr-2" />
-                    <span>{username}</span>
-                    <ChevronDown size={16} className={`ml-1 transform transition-transform ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                </div>
-                
-                {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
-                    <Link 
-                      to="/auth/dashboard" 
-                      className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
-                      onClick={() => setIsProfileMenuOpen(false)}
-                    >
-                      <Settings size={16} className="mr-2" />
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
-                    >
-                      <LogOut size={16} className="mr-2" />
-                      Sign out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link to="/auth/login" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md transition-colors flex items-center">
-                <User size={18} className="mr-2" />
-                Sign In
-              </Link>
-            )}
+            
           </div>
 
           {/* Mobile menu button */}
@@ -367,40 +315,7 @@ const Navbar = () => {
               Contact
             </Link>
             
-            {isLoggedIn ? (
-              <>
-                <div className="px-3 py-2 text-blue-300 font-medium border-t border-blue-700 mt-2 pt-2">
-                  Signed in as <span className="font-bold">{username}</span>
-                </div>
-                <Link 
-                  to="/auth/dashboard" 
-                  className="text-white hover:bg-blue-700 px-3 py-2 rounded-md flex items-center"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <Settings size={18} className="mr-2" />
-                  Dashboard
-                </Link>
-                <button 
-                  onClick={() => {
-                    handleLogout();
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-white hover:bg-blue-700 w-full text-left px-3 py-2 rounded-md flex items-center"
-                >
-                  <LogOut size={18} className="mr-2" />
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <Link 
-                to="/auth/login" 
-                className="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-md flex items-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <User size={18} className="mr-2" />
-                Sign In
-              </Link>
-            )}
+            
           </div>
         </div>
       )}
