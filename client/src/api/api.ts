@@ -1,7 +1,7 @@
 // client/src/api/api.ts - Enhanced API endpoints for product types, team, and testimonials
 
 // Base API URL configuration
-export const API_BASE_URL = 'http://tolatiles.com';
+export const API_BASE_URL = 'https://tolatiles.com';
 
 // API endpoint paths
 export const API_ENDPOINTS = {
